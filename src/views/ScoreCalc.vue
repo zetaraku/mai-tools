@@ -1,257 +1,257 @@
 <template>
-<div class="ScoreCalc">
-  <header>
-    <h1>maimai Score Calculator</h1>
-  </header>
-  <main>
-    <p>
-      <button @click="resetForm">Reset Form</button>
-      &nbsp;
-      <button @click="applyTestcase">Apply Test Data</button>
-    </p>
-    <p>
-      <table>
-        <thead>
-          <tr>
-            <th rowspan="2" class="note-type">Note Type</th>
-            <th rowspan="2" class="note-count">Note Count</th>
-            <th colspan="2">maimai</th>
-            <th colspan="2">maimai DX</th>
-            <th colspan="2" class="unit-score">Deluxe Score</th>
-          </tr>
-          <tr>
-            <th class="unit-score">Unit Score<br>(+Bonus)</th>
-            <th class="unit-achievement">Unit Achievement<br>(+Bonus)</th>
-            <th class="unit-score">Unit Score<br>(+Bonus)</th>
-            <th class="unit-achievement">Unit Achievement<br>(+Bonus)</th>
-            <th class="unit-score">Unit Score</th>
-            <th class="unit-achievement">Unit Achievement</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="noteType in noteTypes" :key="noteType">
-            <th name="note-type">
-              {{ noteType.toUpperCase() }}
-            </th>
-            <td name="note-count"
-              :class="(noteType === 'break' && noteCounts[noteType] < 1) && 'invalid-note-count'"
-            >
-              <input type="number"
-                :min="noteType === 'break' ? 1 : 0"
-                v-model.number="noteCounts[noteType]"
+  <div class="ScoreCalc">
+    <header>
+      <h1>maimai Score Calculator</h1>
+    </header>
+    <main>
+      <p>
+        <button @click="resetForm">Reset Form</button>
+        &nbsp;
+        <button @click="applyTestcase">Apply Test Data</button>
+      </p>
+      <p>
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2" class="note-type">Note Type</th>
+              <th rowspan="2" class="note-count">Note Count</th>
+              <th colspan="2">maimai</th>
+              <th colspan="2">maimai DX</th>
+              <th colspan="2" class="unit-score">Deluxe Score</th>
+            </tr>
+            <tr>
+              <th class="unit-score">Unit Score<br>(+Bonus)</th>
+              <th class="unit-achievement">Unit Achievement<br>(+Bonus)</th>
+              <th class="unit-score">Unit Score<br>(+Bonus)</th>
+              <th class="unit-achievement">Unit Achievement<br>(+Bonus)</th>
+              <th class="unit-score">Unit Score</th>
+              <th class="unit-achievement">Unit Achievement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="noteType in noteTypes" :key="noteType">
+              <th name="note-type">
+                {{ noteType.toUpperCase() }}
+              </th>
+              <td name="note-count"
+                :class="(noteType === 'break' && noteCounts[noteType] < 1) && 'invalid-note-count'"
               >
-              <vue-slider
-                :min="noteType === 'break' ? 1 : 0" :max="1000"
-                :drag-on-click="true"
-                v-model="noteCounts[noteType]"
-              ></vue-slider>
-            </td>
-            <td name="maimai-score">
-              {{ noteBaseScores[noteType] }}
-              <template v-if="noteType === 'break'">
-                (+{{ breakBonusScore }})
-              </template>
-            </td>
-            <td name="maimai-achievement">
-              <span name="text">
-                <b>{{ noteBaseAchievements[noteType].toFixed(2) }}%</b>
+                <input type="number"
+                  :min="noteType === 'break' ? 1 : 0"
+                  v-model.number="noteCounts[noteType]"
+                >
+                <vue-slider
+                  :min="noteType === 'break' ? 1 : 0" :max="1000"
+                  :drag-on-click="true"
+                  v-model="noteCounts[noteType]"
+                ></vue-slider>
+              </td>
+              <td name="maimai-score">
+                {{ noteBaseScores[noteType] }}
                 <template v-if="noteType === 'break'">
-                  <b>&nbsp;(+{{ breakBonusAchievement.toFixed(2) }}%)</b>
+                  (+{{ breakBonusScore }})
                 </template>
-              </span>
-              <span name="bar">
-                <progress-bar
-                  :max="100"
-                  :val="100.0 * noteBaseAchievements[noteType]"
-                ></progress-bar>
-                <template v-if="noteType === 'break'">
+              </td>
+              <td name="maimai-achievement">
+                <span name="text">
+                  <b>{{ noteBaseAchievements[noteType].toFixed(2) }}%</b>
+                  <template v-if="noteType === 'break'">
+                    <b>&nbsp;(+{{ breakBonusAchievement.toFixed(2) }}%)</b>
+                  </template>
+                </span>
+                <span name="bar">
                   <progress-bar
                     :max="100"
-                    bar-color="yellow" bg-color="darkgray"
-                    :val="100.0 * breakBonusAchievement"
+                    :val="100.0 * noteBaseAchievements[noteType]"
                   ></progress-bar>
-                </template>
-              </span>
-            </td>
-            <td name="maimaidx-score">
-              {{ noteBaseScores[noteType] }}
-              <template v-if="noteType === 'break'">
-                <b>(+{{ breakBonusScoreDX.toFixed(0) }})</b>
-              </template>
-            </td>
-            <td name="maimaidx-achievement">
-              <span name="text">
-                <b>{{ noteBaseAchievements[noteType].toFixed(4) }}%</b>
+                  <template v-if="noteType === 'break'">
+                    <progress-bar
+                      :max="100"
+                      bar-color="yellow" bg-color="darkgray"
+                      :val="100.0 * breakBonusAchievement"
+                    ></progress-bar>
+                  </template>
+                </span>
+              </td>
+              <td name="maimaidx-score">
+                {{ noteBaseScores[noteType] }}
                 <template v-if="noteType === 'break'">
-                  <b>&nbsp;(+{{ breakBonusAchievementDX.toFixed(4) }}%)</b>
+                  <b>(+{{ breakBonusScoreDX.toFixed(0) }})</b>
                 </template>
-              </span>
-              <span name="bar">
-                <progress-bar
-                  :max="100"
-                  :val="100.0 * noteBaseAchievements[noteType]"
-                ></progress-bar>
-                <template v-if="noteType === 'break'">
+              </td>
+              <td name="maimaidx-achievement">
+                <span name="text">
+                  <b>{{ noteBaseAchievements[noteType].toFixed(4) }}%</b>
+                  <template v-if="noteType === 'break'">
+                    <b>&nbsp;(+{{ breakBonusAchievementDX.toFixed(4) }}%)</b>
+                  </template>
+                </span>
+                <span name="bar">
                   <progress-bar
                     :max="100"
-                    bar-color="yellow" bg-color="darkgray"
-                    :val="100.0 * breakBonusAchievementDX"
+                    :val="100.0 * noteBaseAchievements[noteType]"
                   ></progress-bar>
+                  <template v-if="noteType === 'break'">
+                    <progress-bar
+                      :max="100"
+                      bar-color="yellow" bg-color="darkgray"
+                      :val="100.0 * breakBonusAchievementDX"
+                    ></progress-bar>
+                  </template>
+                </span>
+              </td>
+              <td name="maimaidx-deluxe-score">
+                {{ noteBaseDeluxeScores[noteType] }}
+              </td>
+              <td name="maimaidx-deluxe-achievement">
+                <span name="text">
+                  <b>{{ noteBaseDeluxeAchievements[noteType].toFixed(4) }}%</b>
+                </span>
+                <span name="bar">
+                  <progress-bar
+                    :max="100"
+                    :val="100.0 * noteBaseDeluxeAchievements[noteType]"
+                  ></progress-bar>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>TOTAL</th>
+              <td><b>{{ totalNoteCount }}</b></td>
+              <td><b>{{ totalBaseScore }} (+{{ totalBonusScore }})</b></td>
+              <td>{{ (100.0).toFixed(2) }}% <b>(+{{ totalBonusAchievement.toFixed(2) }}%)</b></td>
+              <td><b>{{ totalBaseScore }} (+{{ totalBonusScoreDX }})</b></td>
+              <td>{{ (100.0).toFixed(4) }}% (+{{ totalBonusAchievementDX.toFixed(4) }}%)</td>
+              <td><b>{{ totalBaseDeluxeScore }}</b></td>
+              <td>{{ (100.0).toFixed(4) }}%</td>
+            </tr>
+          </tfoot>
+        </table>
+      </p>
+      <p>
+        * Bonus in the above table are counted separately.
+      </p>
+      <p>
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2" class="note-type">Note Type</th>
+              <th rowspan="2" class="note-count">Note Count</th>
+              <th colspan="5">Player Performance</th>
+              <th colspan="3">Player Result</th>
+            </tr>
+            <tr>
+              <th class="judgement-type">CRITICAL<br>PERFECT [3]<br><small>100% (+100% bonus)</small></th>
+              <th class="judgement-type">PERFECT [2]<br><small>100%<br>(+75%/50% bonus)</small></th>
+              <th class="judgement-type">GREAT [1]<br><small>80%<br>(+40% bonus)</small></th>
+              <th class="judgement-type">GOOD [0]<br><small>50%<br>(+25% bonus)</small></th>
+              <th class="judgement-type">MISS [0]<br><small>0%<br>(+0% bonus)</small></th>
+              <th class="player-score">Score<br>(maimai)</th>
+              <th class="player-score">Score<br>(maimai DX)</th>
+              <th class="player-score">Deluxe<br>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="noteType in noteTypes" :key="noteType">
+              <th name="note-type">
+                {{ noteType.toUpperCase() }}
+              </th>
+              <td name="note-count"
+                :class="isPlayerNoteCountMismatched(noteType) && 'invalid-note-count'"
+              >
+                <b>{{ playerNoteCounts[noteType] }}</b>
+                /
+                <input type="number" v-model.number="noteCounts[noteType]" disabled>
+              </td>
+              <td name="performance-critical">
+                <template v-if="noteType === 'break'">
+                  <small><i>2600pt:&nbsp;</i></small>
                 </template>
-              </span>
-            </td>
-            <td name="maimaidx-deluxe-score">
-              {{ noteBaseDeluxeScores[noteType] }}
-            </td>
-            <td name="maimaidx-deluxe-achievement">
-              <span name="text">
-                <b>{{ noteBaseDeluxeAchievements[noteType].toFixed(4) }}%</b>
-              </span>
-              <span name="bar">
+                <input type="number" :min="0" v-model.number="playerPerformance[noteType].critical">
+              </td>
+              <td name="performance-perfect">
+                <template v-if="noteType === 'break'">
+                  <small><i>2550pt:&nbsp;</i></small>
+                  <input type="number" :min="0" v-model.number="playerPerformance.break.better_perfect">
+                  <br>
+                  <small><i>2500pt:&nbsp;</i></small>
+                  <input type="number" :min="0" v-model.number="playerPerformance.break.perfect">
+                </template>
+                <template v-else>
+                  <input type="number" :min="0" v-model.number="playerPerformance[noteType].perfect">
+                </template>
+              </td>
+              <td name="performance-great">
+                <input type="number" :min="0" v-model.number="playerPerformance[noteType].great">
+              </td>
+              <td name="performance-good">
+                <input type="number" :min="0" v-model.number="playerPerformance[noteType].good">
+              </td>
+              <td name="performance-miss">
+                <input type="number" :min="0" v-model.number="playerPerformance[noteType].miss">
+              </td>
+              <td name="maimai-score-result">
+                <b>{{ playerScoreSubtotals[noteType].toFixed(0) }}</b><br>
+                <b>({{ playerScoreSubtotalPercentages(noteType).toFixed(2) }}%)</b><br>
                 <progress-bar
                   :max="100"
-                  :val="100.0 * noteBaseDeluxeAchievements[noteType]"
+                  :val="playerScoreSubtotalPercentages(noteType)"
                 ></progress-bar>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>TOTAL</th>
-            <td><b>{{ totalNoteCount }}</b></td>
-            <td><b>{{ totalBaseScore }} (+{{ totalBonusScore }})</b></td>
-            <td>{{ (100.0).toFixed(2) }}% <b>(+{{ totalBonusAchievement.toFixed(2) }}%)</b></td>
-            <td><b>{{ totalBaseScore }} (+{{ totalBonusScoreDX }})</b></td>
-            <td>{{ (100.0).toFixed(4) }}% (+{{ totalBonusAchievementDX.toFixed(4) }}%)</td>
-            <td><b>{{ totalBaseDeluxeScore }}</b></td>
-            <td>{{ (100.0).toFixed(4) }}%</td>
-          </tr>
-        </tfoot>
-      </table>
-    </p>
-    <p>
-      * Bonus in the above table are counted separately.
-    </p>
-    <p>
-      <table>
-        <thead>
-          <tr>
-            <th rowspan="2" class="note-type">Note Type</th>
-            <th rowspan="2" class="note-count">Note Count</th>
-            <th colspan="5">Player Performance</th>
-            <th colspan="3">Player Result</th>
-          </tr>
-          <tr>
-            <th class="judgement-type">CRITICAL<br>PERFECT [3]<br><small>100% (+100% bonus)</small></th>
-            <th class="judgement-type">PERFECT [2]<br><small>100%<br>(+75%/50% bonus)</small></th>
-            <th class="judgement-type">GREAT [1]<br><small>80%<br>(+40% bonus)</small></th>
-            <th class="judgement-type">GOOD [0]<br><small>50%<br>(+25% bonus)</small></th>
-            <th class="judgement-type">MISS [0]<br><small>0%<br>(+0% bonus)</small></th>
-            <th class="player-score">Score<br>(maimai)</th>
-            <th class="player-score">Score<br>(maimai DX)</th>
-            <th class="player-score">Deluxe<br>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="noteType in noteTypes" :key="noteType">
-            <th name="note-type">
-              {{ noteType.toUpperCase() }}
-            </th>
-            <td name="note-count"
-              :class="isPlayerNoteCountMismatched(noteType) && 'invalid-note-count'"
-            >
-              <b>{{ playerNoteCounts[noteType] }}</b>
-              /
-              <input type="number" v-model.number="noteCounts[noteType]" disabled>
-            </td>
-            <td name="performance-critical">
-              <template v-if="noteType === 'break'">
-                <small><i>2600pt:&nbsp;</i></small>
-              </template>
-              <input type="number" :min="0" v-model.number="playerPerformance[noteType].critical">
-            </td>
-            <td name="performance-perfect">
-              <template v-if="noteType === 'break'">
-                <small><i>2550pt:&nbsp;</i></small>
-                <input type="number" :min="0" v-model.number="playerPerformance.break.better_perfect">
-                <br>
-                <small><i>2500pt:&nbsp;</i></small>
-                <input type="number" :min="0" v-model.number="playerPerformance.break.perfect">
-              </template>
-              <template v-else>
-                <input type="number" :min="0" v-model.number="playerPerformance[noteType].perfect">
-              </template>
-            </td>
-            <td name="performance-great">
-              <input type="number" :min="0" v-model.number="playerPerformance[noteType].great">
-            </td>
-            <td name="performance-good">
-              <input type="number" :min="0" v-model.number="playerPerformance[noteType].good">
-            </td>
-            <td name="performance-miss">
-              <input type="number" :min="0" v-model.number="playerPerformance[noteType].miss">
-            </td>
-            <td name="maimai-score-result">
-              <b>{{ playerScoreSubtotals[noteType].toFixed(0) }}</b><br>
-              <b>({{ playerScoreSubtotalPercentages(noteType).toFixed(2) }}%)</b><br>
-              <progress-bar
-                :max="100"
-                :val="playerScoreSubtotalPercentages(noteType)"
-              ></progress-bar>
-            </td>
-            <td name="maimaidx-score-result">
-              <b>{{ playerScoreSubtotalsDX[noteType].toFixed(0) }}</b><br>
-              <b>({{ playerScoreSubtotalPercentagesDX(noteType).toFixed(4) }}%)</b><br>
-              <progress-bar
-                :max="100"
-                :val="playerScoreSubtotalPercentagesDX(noteType)"
-              ></progress-bar>
-            </td>
-            <td name="maimaidx-deluxe-score-result">
-              <b>{{ playerDeluxeScoreSubtotals[noteType] }}</b><br>
-              <b>({{ playerDeluxeScoreSubtotalPercentages(noteType).toFixed(4) }}%)</b><br>
-              <progress-bar
-                :max="100"
-                :val="playerDeluxeScoreSubtotalPercentages(noteType)"
-              ></progress-bar>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>TOTAL</th>
-            <td><b>{{ totalNoteCount }}</b></td>
-            <td><b>{{ playerPerformanceOverview.critical }}</b></td>
-            <td>
-              <b>{{ playerPerformanceOverview.better_perfect }}</b> +
-              <b>{{ playerPerformanceOverview.perfect }}</b>
-            </td>
-            <td><b>{{ playerPerformanceOverview.great }}</b></td>
-            <td><b>{{ playerPerformanceOverview.good }}</b></td>
-            <td><b>{{ playerPerformanceOverview.miss }}</b></td>
-            <td class="player-result">
-              <b>{{ playerScore.toFixed(0) }}</b><br>
-              <b>({{ playerAchievement.toFixed(2) }}%)</b>
-            </td>
-            <td class="player-result">
-              <b>{{ playerScoreDX.toFixed(0) }}</b><br>
-              <b>({{ playerAchievementDX.toFixed(4) }}%)</b>
-            </td>
-            <td class="player-result">
-              <b>{{ playerDeluxeScore }}</b><br>
-              <b>({{ playerDeluxeAchievement.toFixed(4) }}%)</b>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </p>
-  </main>
-  <footer>
-    <b>maimai Score Calculator</b> is made by
-    <a href="https://github.com/zetaraku/" target="_blank" rel="noopener">Raku Zeta</a>
-  </footer>
-</div>
+              </td>
+              <td name="maimaidx-score-result">
+                <b>{{ playerScoreSubtotalsDX[noteType].toFixed(0) }}</b><br>
+                <b>({{ playerScoreSubtotalPercentagesDX(noteType).toFixed(4) }}%)</b><br>
+                <progress-bar
+                  :max="100"
+                  :val="playerScoreSubtotalPercentagesDX(noteType)"
+                ></progress-bar>
+              </td>
+              <td name="maimaidx-deluxe-score-result">
+                <b>{{ playerDeluxeScoreSubtotals[noteType] }}</b><br>
+                <b>({{ playerDeluxeScoreSubtotalPercentages(noteType).toFixed(4) }}%)</b><br>
+                <progress-bar
+                  :max="100"
+                  :val="playerDeluxeScoreSubtotalPercentages(noteType)"
+                ></progress-bar>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>TOTAL</th>
+              <td><b>{{ totalNoteCount }}</b></td>
+              <td><b>{{ playerPerformanceOverview.critical }}</b></td>
+              <td>
+                <b>{{ playerPerformanceOverview.better_perfect }}</b> +
+                <b>{{ playerPerformanceOverview.perfect }}</b>
+              </td>
+              <td><b>{{ playerPerformanceOverview.great }}</b></td>
+              <td><b>{{ playerPerformanceOverview.good }}</b></td>
+              <td><b>{{ playerPerformanceOverview.miss }}</b></td>
+              <td class="player-result">
+                <b>{{ playerScore.toFixed(0) }}</b><br>
+                <b>({{ playerAchievement.toFixed(2) }}%)</b>
+              </td>
+              <td class="player-result">
+                <b>{{ playerScoreDX.toFixed(0) }}</b><br>
+                <b>({{ playerAchievementDX.toFixed(4) }}%)</b>
+              </td>
+              <td class="player-result">
+                <b>{{ playerDeluxeScore }}</b><br>
+                <b>({{ playerDeluxeAchievement.toFixed(4) }}%)</b>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </p>
+    </main>
+    <footer>
+      <b>maimai Score Calculator</b> is made by
+      <a href="https://github.com/zetaraku/" target="_blank" rel="noopener">Raku Zeta</a>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -495,7 +495,7 @@ export default {
           let bonusUnitScore = bonusUnitScoreFunc(noteType);
           let unitCount = this.noteCounts[noteType];
           return (baseUnitScore + bonusUnitScore) * unitCount;
-         })();
+        })();
         return acc;
       }, {});
     },
