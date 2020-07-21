@@ -1,0 +1,82 @@
+[
+  {
+    "songNoteCounts": {
+      "TAP": 432,
+      "HOLD": 32,
+      "SLIDE": 166,
+      "TOUCH": 0,
+      "BREAK": 4
+    },
+    "playerPerformance": {
+      "TAP": {
+        "CRITICAL": 183, "PERFECT": 219, "GREAT": 29, "GOOD": 1, "MISS": 0
+      },
+      "HOLD": {
+        "CRITICAL": 16, "PERFECT": 16, "GREAT": 0, "GOOD": 0, "MISS": 0
+      },
+      "SLIDE": {
+        "CRITICAL": 158, "PERFECT": 0, "GREAT": 6, "GOOD": 2, "MISS": 0
+      },
+      "TOUCH": {
+        "CRITICAL": 0, "PERFECT": 0, "GREAT": 0, "GOOD": 0, "MISS": 0
+      },
+      "BREAK": {
+        "CRITICAL": {
+          "2600": 2
+        },
+        "PERFECT": {
+          "2550": 2, "2500": 0
+        },
+        "GREAT": {
+          "2000": 0, "1500": 0, "1250": 0
+        },
+        "GOOD": {
+          "1000": 0
+        },
+        "MISS": {
+          "0": 0
+        }
+      }
+    }
+  },
+  {
+    "songNoteCounts": {
+      "TAP": 718,
+      "HOLD": 58,
+      "SLIDE": 74,
+      "TOUCH": 44,
+      "BREAK": 43
+    },
+    "playerPerformance": {
+      "TAP": {
+        "CRITICAL": 346, "PERFECT": 272, "GREAT": 78, "GOOD": 12, "MISS": 10
+      },
+      "HOLD": {
+        "CRITICAL": 23, "PERFECT": 34, "GREAT": 1, "GOOD": 0, "MISS": 0
+      },
+      "SLIDE": {
+        "CRITICAL": 71, "PERFECT": 0, "GREAT": 0, "GOOD": 2, "MISS": 1
+      },
+      "TOUCH": {
+        "CRITICAL": 43, "PERFECT": 0, "GREAT": 0, "GOOD": 1, "MISS": 0
+      },
+      "BREAK": {
+        "CRITICAL": {
+          "2600": 23
+        },
+        "PERFECT": {
+          "2550": 17, "2500": 0
+        },
+        "GREAT": {
+          "2000": 3, "1500": 0, "1250": 0
+        },
+        "GOOD": {
+          "1000": 0
+        },
+        "MISS": {
+          "0": 0
+        }
+      }
+    }
+  }
+]

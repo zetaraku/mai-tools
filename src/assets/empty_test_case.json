@@ -1,0 +1,40 @@
+{
+  "songNoteCounts": {
+    "TAP": 0,
+    "HOLD": 0,
+    "SLIDE": 0,
+    "TOUCH": 0,
+    "BREAK": 0
+  },
+  "playerPerformance": {
+    "TAP": {
+      "CRITICAL": 0, "PERFECT": 0, "GREAT": 0, "GOOD": 0, "MISS": 0
+    },
+    "HOLD": {
+      "CRITICAL": 0, "PERFECT": 0, "GREAT": 0, "GOOD": 0, "MISS": 0
+    },
+    "SLIDE": {
+      "CRITICAL": 0, "PERFECT": 0, "GREAT": 0, "GOOD": 0, "MISS": 0
+    },
+    "TOUCH": {
+      "CRITICAL": 0, "PERFECT": 0, "GREAT": 0, "GOOD": 0, "MISS": 0
+    },
+    "BREAK": {
+      "CRITICAL": {
+        "2600": 0
+      },
+      "PERFECT": {
+        "2550": 0, "2500": 0
+      },
+      "GREAT": {
+        "2000": 0, "1500": 0, "1250": 0
+      },
+      "GOOD": {
+        "1000": 0
+      },
+      "MISS": {
+        "0": 0
+      }
+    }
+  }
+}

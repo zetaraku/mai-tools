@@ -3,11 +3,17 @@ module.exports = {
   env: {
     node: true,
   },
-  'extends': [
+  extends: [
     'plugin:vue/essential',
-    'eslint:recommended',
+    '@vue/airbnb',
   ],
   rules: {
+    'prefer-const': 'off',
+    'arrow-parens': ['error', 'as-needed'],
+    'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
+    'operator-linebreak': ['error', 'before', {
+      overrides: { '?': 'after', ':': 'after' },
+    }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
