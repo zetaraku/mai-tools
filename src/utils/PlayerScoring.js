@@ -177,6 +177,16 @@ export default class PlayerScoring {
     return '--';
   }
 
+  get playerDeluxeStars() {
+    let playerAchievement = this.playerDeluxeAchievement;
+    for (let { achievement, star } of Constants.deluxeAchievementToStars) {
+      if (playerAchievement >= achievement) {
+        return star;
+      }
+    }
+    return '--';
+  }
+
   get playerComboRank() {
     let breakPerfectCount = Constants.judgementSubtypes.PERFECT
       .map(

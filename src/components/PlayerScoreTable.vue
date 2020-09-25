@@ -123,7 +123,8 @@
           </td>
           <td class="player-result">
             <b>{{ playerScoring.playerDeluxeScore }}</b><br />
-            <!-- <b>({{ playerScoring.playerDeluxeAchievement.toFixed(4) }}%)</b><br /> -->
+            <b>({{ playerScoring.playerDeluxeAchievement.toFixed(4) }}%)</b><br />
+            <b>☆{{ playerScoring.playerDeluxeStars }}</b><br />
           </td>
         </tr>
       </tfoot>

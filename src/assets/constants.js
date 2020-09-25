@@ -159,3 +159,11 @@ export const achievementToRank_DX = [
   { achievement: 50.0000, rank: 'C' },
   { achievement: 0.0000, rank: 'D' },
 ];
+export const deluxeAchievementToStars = [
+  { achievement: 97, star: 5 },
+  { achievement: 95, star: 4 },
+  { achievement: 93, star: 3 },
+  { achievement: 90, star: 2 },
+  { achievement: 85, star: 1 },
+  { achievement: 0, star: 0 },
+];

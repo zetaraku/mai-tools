@@ -102,15 +102,11 @@
                 songScoring.breakBonusScore_DX.toFixed(0)
               }}</b></template>
               <br />
-              <template v-if="noteType !== 'BREAK'">(<b>{{
+              (<b>{{
                 songScoring.noteBaseAchievementsOf(noteType).toFixed(4)
-              }}%</b>)</template>
-              <template v-else>(<b>{{
-                (
-                  songScoring.noteBaseAchievementsOf(noteType)
-                  + songScoring.breakBonusAchievement_DX
-                ).toFixed(4)
-              }}%</b>)</template>
+              }}%</b><template v-if="noteType === 'BREAK'"> + <b>{{
+                songScoring.breakBonusAchievement_DX.toFixed(4)
+              }}</b></template>)
             </div>
             <div name="bar">
               <progress-bar
