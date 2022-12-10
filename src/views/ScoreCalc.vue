@@ -1,22 +1,20 @@
 <template>
   <div class="ScoreCalc">
     <header>
-      <h1>maimai 新舊版本成績計算器</h1>
+      <h1>maimai Score Calculator</h1>
     </header>
     <main>
       <p>
-        <button @click="resetForm">重設表單</button>
+        <button @click="resetForm">Reset Form</button>
         &nbsp;
-        <button @click="applyTestcase">填入測試資料</button>
+        <button @click="applyTestcase">Fill with Test Data</button>
       </p>
       <SongScoreTable :songScoring="songScoring" />
-      <p>
-        ※BREAK加分與基本分分開計算
-      </p>
+      <br />
       <PlayerScoreTable :songScoring="songScoring" :playerScoring="playerScoring" />
     </main>
     <footer>
-      <b>maimai 新舊版本成績計算器</b> is made by
+      <b>maimai Score Calculator</b> is made by
       <a href="https://github.com/zetaraku/" target="_blank" rel="noopener">Raku Zeta</a>
     </footer>
   </div>

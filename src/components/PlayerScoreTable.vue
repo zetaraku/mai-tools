@@ -3,10 +3,10 @@
     <table>
       <thead>
         <tr>
-          <th rowspan="2" class="note-type">NOTE 類型</th>
-          <th rowspan="2" class="note-count">NOTE 數量</th>
-          <th colspan="5">玩家表現</th>
-          <th colspan="3">成績總結</th>
+          <th rowspan="2" class="note-type">NOTE Type</th>
+          <th rowspan="2" class="note-count">NOTE Count</th>
+          <th colspan="5">Player Performance</th>
+          <th colspan="3">Player Result</th>
         </tr>
         <tr>
           <th class="judgement-type"
@@ -20,13 +20,13 @@
             }}<br />
           </th>
           <th class="player-score">
-            舊版 maimai<br />計分方式
+            maimai<br />Scoring
           </th>
           <th class="player-score">
-            新版 maimai DX<br />計分方式
+            maimai DX<br />Scoring
           </th>
           <th class="player-score">
-            新版 DX SCORE<br />計分方式
+            DX SCORE<br />Scoring
           </th>
         </tr>
       </thead>
@@ -102,7 +102,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <th>總計</th>
+          <th>Total</th>
           <td
             :class="playerScoring.isPlayerTotalNoteCountMismatched() && 'invalid-note-count'"
           >

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{ name: 'home' }">首頁</router-link> |
-      <router-link :to="{ name: 'score-calc' }">maimai 新舊版本成績計算器</router-link>
+      <router-link :to="{ name: 'home' }">Home</router-link> |
+      <router-link :to="{ name: 'score-calc' }">maimai Score Calculator</router-link>
     </div>
     <router-view />
     <GitHubCorner href="https://github.com/zetaraku/mai-tools" />

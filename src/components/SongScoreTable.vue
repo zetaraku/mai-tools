@@ -3,19 +3,19 @@
     <table>
       <thead>
         <tr>
-          <th rowspan="2" class="note-type">NOTE 類型</th>
-          <th rowspan="2" class="note-count">NOTE 數量</th>
-          <th colspan="2">舊版 maimai 計分方式</th>
-          <th colspan="2">新版 maimai DX 計分方式</th>
-          <th colspan="2">新版 DX SCORE 計分方式</th>
+          <th rowspan="2" class="note-type">NOTE Type</th>
+          <th rowspan="2" class="note-count">NOTE Count</th>
+          <th colspan="2">maimai Scoring</th>
+          <th colspan="2">maimai DX Scoring</th>
+          <th colspan="2">DX SCORE Scoring</th>
         </tr>
         <tr>
-          <th class="unit-score">單位分數</th>
-          <th class="group-score">整體佔分</th>
-          <th class="unit-score">單位分數</th>
-          <th class="group-score">整體佔分</th>
-          <th class="unit-score">單位分數</th>
-          <th class="group-score">整體佔分</th>
+          <th class="unit-score">Unit Score</th>
+          <th class="group-score">Total Score</th>
+          <th class="unit-score">Unit Score</th>
+          <th class="group-score">Total Score</th>
+          <th class="unit-score">Unit Score</th>
+          <th class="group-score">Total Score</th>
         </tr>
       </thead>
       <tbody>
@@ -186,7 +186,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <th>總計</th>
+          <th>Total</th>
           <td>
             <b>{{ songScoring.totalNoteCount }}</b>
           </td>
