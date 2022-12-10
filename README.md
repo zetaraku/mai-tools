@@ -12,7 +12,7 @@ Current sub-projects available are:
 
 ## Try it Online!
 
-[https://mai-tools.herokuapp.com/](https://mai-tools.herokuapp.com/)
+<https://mai-tools.netlify.app/>
 
 ## Development
 
