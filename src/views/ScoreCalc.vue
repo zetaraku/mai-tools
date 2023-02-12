@@ -38,7 +38,7 @@ export default {
     PlayerScoreTable,
   },
   created() {
-    this.applyTestcase();
+    // this.applyTestcase();
   },
   data() {
     let songScoring = new SongScoring();
